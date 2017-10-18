@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DemoTests" GeneratedClassName="Config">
+  <Profiles />
+  <Settings>
+    <Setting Name="url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://dry-garden-46576.herokuapp.com/</Value>
+    </Setting>
+    <Setting Name="resultsfile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\TestResults\DemoTestResults</Value>
+    </Setting>
+    <Setting Name="postToSlack" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="urlWithAccessToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://hooks.slack.com/services/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</Value>
+    </Setting>
+    <Setting Name="slackChannel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#faron-test</Value>
+    </Setting>
+    <Setting Name="createJiraTicket" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="JiraUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">faronc</Value>
+    </Setting>
+    <Setting Name="JiraPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PASS</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

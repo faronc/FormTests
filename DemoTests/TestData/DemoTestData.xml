@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SVTests>
+  <stringTest>
+    <TestCaseID>Demo_001</TestCaseID>
+    <TestTitle>Happy Path Form submission</TestTitle>
+    <TestDesc>Verifying all fields are populated with valid data</TestDesc>
+    <BugNumber></BugNumber>
+    <ExpectedScenario>Progress: All fields tested with valid data</ExpectedScenario>
+    <ConvertToExcelNow>N</ConvertToExcelNow>
+    <TextToAppear>Thank you for your query;We will contact you within 24 hours</TextToAppear>
+    <TextNotToAppear>Your Details</TextNotToAppear>
+    <Title>Mr</Title>
+    <FirstName>Séan</FirstName>
+    <Surname>Ó'Sé</Surname>
+    <Email>test@test.com</Email>
+    <Gender>Male</Gender>
+    <DateOfBirth>29/02/1980</DateOfBirth>
+    <MobilePhoneNumber>0871234560</MobilePhoneNumber>
+    <AddressLine1>Appartment #34</AddressLine1>
+    <AddressLine2>23 Main St.</AddressLine2>
+    <AddressLine3>Carrick-on-Shannon</AddressLine3>
+    <County>Leitrim</County>
+    <AccountNumber>08956800</AccountNumber>
+    <SortCodeMiddle>15</SortCodeMiddle>
+    <SortCodeLast>84</SortCodeLast>
+    <DescriptionOfQuery>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</DescriptionOfQuery>
+  </stringTest>
+  <stringTest>
+    <TestCaseID>Demo_002</TestCaseID>
+    <TestTitle>Account Number must be 8 digits</TestTitle>
+    <TestDesc>Verifying account number with 7 digits is blocked from submitting</TestDesc>
+    <BugNumber></BugNumber>
+    <ExpectedScenario>Fail to Submit - validation error expected on the account number field</ExpectedScenario>
+    <ConvertToExcelNow>N</ConvertToExcelNow>
+    <TextToAppear>Please enter a valid Account Number containing digits only</TextToAppear>
+    <TextNotToAppear>Thank you for your query;We will contact you within 24 hours</TextNotToAppear>
+    <Title>Mr</Title>
+    <FirstName>Séan</FirstName>
+    <Surname>Ó'Sé</Surname>
+    <Email>test@test.com</Email>
+    <Gender>Male</Gender>
+    <DateOfBirth>29/02/1980</DateOfBirth>
+    <MobilePhoneNumber>0871234560</MobilePhoneNumber>
+    <AddressLine1>Appartment #34</AddressLine1>
+    <AddressLine2>23 Main St.</AddressLine2>
+    <AddressLine3>Carrick-on-Shannon</AddressLine3>
+    <County>Leitrim</County>
+    <AccountNumber>0123456</AccountNumber>
+    <SortCodeMiddle>15</SortCodeMiddle>
+    <SortCodeLast>84</SortCodeLast>
+    <DescriptionOfQuery>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</DescriptionOfQuery>
+  </stringTest>
+</SVTests>
