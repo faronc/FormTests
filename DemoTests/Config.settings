@@ -9,22 +9,22 @@
       <Value Profile="(Default)">c:\TestResults\DemoTestResults</Value>
     </Setting>
     <Setting Name="postToSlack" Type="System.String" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="urlWithAccessToken" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://hooks.slack.com/services/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</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="slackChannel" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#faron-test</Value>
+      <Value Profile="(Default)">#test-results</Value>
     </Setting>
     <Setting Name="createJiraTicket" Type="System.String" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="JiraUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">faronc</Value>
     </Setting>
     <Setting Name="JiraPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">PASS</Value>
+      <Value Profile="(Default)">YourJiraPassword</Value>
+    </Setting>
+    <Setting Name="urlWithAccessToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://hooks.slack.com/services/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</Value>
     </Setting>
   </Settings>
 </SettingsFile>

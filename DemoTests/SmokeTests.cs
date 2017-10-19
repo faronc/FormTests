@@ -4,6 +4,7 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CommonClassUtils;
 using DemoActions;
+using SlackLibrary;
 
 namespace DemoTests
 {
@@ -19,6 +20,7 @@ namespace DemoTests
         private string _url = string.Empty;
         private string _pass = "Pass";
         private string _fail = "Fail";
+        private string _warning = "Warning";
         private string _testExplanation = String.Empty;
         private bool _status = true;
         public static string DateTimeForFileName = DateTime.Now.ToString(@"MMM\-dd-HH\-mm");
@@ -26,7 +28,7 @@ namespace DemoTests
         private string _jiraTicketNumberWithAutomationResults = String.Empty;
         private bool _createJiraTicket;
         private string jiraThreeLetterProjectId = "TST";
-        private string jiraParentId = "TST-1";
+        private string jiraParentId = "TST-92";
 
         /// <summary>
         /// Create a new instance of the driver
@@ -49,14 +51,15 @@ namespace DemoTests
         /// <summary>
         /// Smoke Test to verify previously logged bugs
         /// To be run against each new deployment
+        /// SLACK: https://faronc.slack.com
         /// </summary>
         [TestMethod]
         public void DataDriverDemoTests()
         {
-            const string testCaseId = "BVT_BCC_01";
-            const string testProject = "Business Credit Cards Application form";
-            const string testTitle = "Sept 2017 Sprint 42 Release PLOF-4560";
-            const string testDesc = "Journey 1: Business Credit Card - Unincorporated";
+            const string testCaseId = "Demo_01";
+            const string testProject = "Sample Demo form project";
+            const string testTitle = "Nov 2017: Running Smoke tests on each deployment";
+            const string testDesc = "Bug regression to ensure previous bugs are still fixed";
             var slackNotes = "";
             var testTester = "QA Automation";
             _slackChannel = Config.Default.slackChannel;
@@ -110,7 +113,8 @@ namespace DemoTests
 
                 var testDataUsed =
                     string.Format(
-                        "Test Data Used in this test:\n{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}\n{11}\n{12}\n{13}\n",
+                        "Test Data Used in this test:\nTitle: {0}\nFirst Name: {1}\nSurname: {2}\nEmail: {3}\nGender: {4}\nDate of Birth: {5}\nMobile Number: {6}\nAddress Line 1: {7}\nAddress Line 2: {8}\n" +
+                        "County: {9}\nAccount Number: {10}\nSort Code Middle: {11}\nSort Code Last: {12}\nDescription of Query: {13}\n",
                         title, firstName, surname, email, gender, dateOfBirth, mobilePhoneNumber, addressLine1,
                         addressLine2, county, accountNumber, sortCodeMiddle, sortCodeLast, descriptionOfQuery);
 
@@ -127,7 +131,7 @@ namespace DemoTests
                 // PAGE 1 - GETTING STARTED
 
                 Thread.Sleep(1000);
-                _testExplanation = "\nTEST SCENARIO: Populating Page 1 - YOUR DETAILS - page";
+                _testExplanation = "\nTEST SCENARIO: Populating form with data that caused issues previously to ensure these are still fixed\n\n";
                 using (var file = new StreamWriter(_resultsFile, true))
                 {
                     file.WriteLine(_testExplanation);
@@ -151,20 +155,63 @@ namespace DemoTests
                 FormUtilitiesActions.EnterTextIntoInputBox("sortcodelast", sortCodeLast);
                 FormUtilitiesActions.EnterTextIntoInputBox("descriptionofquery", descriptionOfQuery);
 
-                _testExplanation =
-                    "BUG NUMBER: TST-05 - Account Number field accepting alpha characters - should only accept 8 digits";
+
+                // START TEST 1
+                _testExplanation = "BUG NUMBER: TST-92 - Account Number field accepting alpha characters - should only accept 8 digits\n";
                 FormUtilitiesActions.EnterTextIntoInputBox("accountnumber", "abcdefgh");
                 FormUtilitiesActions.ClickButton("submitbutton");
 
-                _message = VerifyMyTests.VerifyStringOnThePage("accountnumber", "Please enter a valid Account Number containing digits only", "");
+                _message = VerifyMyTests.VerifyStringOnThePage("Please enter a valid Account Number containing digits only", "Thank You");
+                Thread.Sleep(100);
+                using (var file = new StreamWriter(_resultsFile, true))
+                {
+                    file.WriteLine(_testExplanation + _message);
+                }
+                FormUtilitiesActions.EnterTextIntoInputBox("accountnumber", accountNumber);
+                // END TEST 1
+
+
+
+
+                // START TEST 2
+                _testExplanation = "BUG NUMBER: TST-93 - Email must be a valid email\n";
+                FormUtilitiesActions.EnterTextIntoInputBox("email", "invalid.email");
+                FormUtilitiesActions.ClickButton("submitbutton");
+
+                _message = VerifyMyTests.VerifyStringOnThePage("Please enter a valid email address", "Thank You");
                 Thread.Sleep(100);
                 using (var file = new StreamWriter(_resultsFile, true))
                 {
                     file.WriteLine(_testExplanation + _message);
                 }
 
+                FormUtilitiesActions.EnterTextIntoInputBox("email", email);
+                // END TEST 3
 
 
+
+
+
+                // START TEST 3
+                _testExplanation = "Submitting the form with all valid data and verifying the Thank You page\n";
+                FormUtilitiesActions.ClickButton("submitbutton");
+                _message = VerifyMyTests.VerifyStringOnThePage("Confirmation;Thank You;Thank you for your query. We will contact you within 24 hours.", "");
+                Thread.Sleep(100);
+                using (var file = new StreamWriter(_resultsFile, true))
+                {
+                    file.WriteLine(_testExplanation + _message);
+                }
+                // END TEST 3
+
+
+
+
+
+                Thread.Sleep(100);
+                using (var file = new StreamWriter(_resultsFile, true))
+                {
+                    file.WriteLine("TEST COMPLETE");
+                }
 
             }
             catch (Exception)
@@ -177,17 +224,14 @@ namespace DemoTests
                     file.WriteLine(catchError);
                 }
             }
+
+
+
+            _jiraTicketNumberWithAutomationResults = JiraActions.PostToJira(testProject, testCaseId, jiraUsername, jiraPassword, jiraThreeLetterProjectId, _resultsFile, jiraParentId);
+
+            PostToSlack.PostResultsToSlack(bvtResult, testTester, testCaseId, testProject, testTitle, testDesc, _resultsFile, _jiraTicketNumberWithAutomationResults, _url, _urlWithAccessToken, _slackChannel);
+
         }
-
-
-
-
-
-
-
-
-
-
 
 
 

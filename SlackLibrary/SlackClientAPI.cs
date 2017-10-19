@@ -10,18 +10,16 @@ using System.Linq;
 
 namespace SlackLibrary
 {
+
     //A simple C# class to post messages to a Slack channel based on
-    //https://gist.github.com/jogleasonjr/7121367
+    //https://www.github.com/faronc
     //Note: This class uses the Newtonsoft Json.NET serializer available via NuGet
-    //atualizar para https://api.slack.com/methods/chat.postMessage
     public class SlackClientAPI
     {
         private readonly Uri _uri;
         private readonly Encoding _encoding = new UTF8Encoding();
-        public SlackClientAPI()
-        {
-			_uri = new Uri("https://hooks.slack.com/services/T0LLV5RKJ/B0PSKMCRE/YOUR-SLACK-TOKEN-HERE");
-        }
+        
+
         //Post a message using simple strings
         public void PostMessage(string token, string text, string username = null, string channel = null)
         {
@@ -36,35 +34,6 @@ namespace SlackLibrary
             PostMessage(args);
         }
 
-        private string ToQueryString(Object p)
-        {
-            List<string> properties = new List<string>();
-
-            foreach (System.Reflection.PropertyInfo propertyInfo in p.GetType().GetProperties())
-            {
-                if (propertyInfo.CanRead)
-                {
-                    string JsonProperty = propertyInfo.GetCustomAttributes(true).Where(x => x.GetType() == typeof(JsonPropertyAttribute)).Select(x => ((JsonPropertyAttribute)x).PropertyName).FirstOrDefault();
-                    if (propertyInfo.PropertyType == typeof(ObservableCollection<Attachment>))
-                    {
-                        if (propertyInfo.GetValue(p, null) != null)
-                        {
-                            properties.Add(string.Format("{0}={1}", JsonProperty != null ? JsonProperty : propertyInfo.Name, HttpUtility.UrlEncode(JsonConvert.SerializeObject(propertyInfo.GetValue(p, null)))));
-                        }
-                    }
-                    else
-                    {
-                        if (propertyInfo.GetValue(p, null) != null)
-                        {
-                            properties.Add(string.Format("{0}={1}", JsonProperty != null ? JsonProperty : propertyInfo.Name, HttpUtility.UrlEncode(propertyInfo.GetValue(p, null).ToString())));
-                        }
-                    }
-
-                }
-            }
-
-            return string.Join("&", properties.ToArray());
-        }
 
         public NameValueCollection ToQueryNVC(Object p)
         {

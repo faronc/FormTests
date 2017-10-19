@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildUri.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="GenerateRandomStrings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

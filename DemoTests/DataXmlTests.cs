@@ -151,7 +151,7 @@ namespace DemoTests
 
                 // Verify Your Tests
                 _testExplanation = "TEST CASE: Verify the expected success/failure strings appear on the page\n";
-                _message = VerifyMyTests.VerifyStringOnThePage("pagecontent", textToAppear, textNotToAppear);
+                _message = VerifyMyTests.VerifyStringOnThePage(textToAppear, textNotToAppear);
                 Thread.Sleep(100);
                 using (var file = new StreamWriter(_resultsFile, true))
                 {

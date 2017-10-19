@@ -54,9 +54,9 @@ namespace SlackLibrary
                 ? string.Format("Url: {0}\n", url)
                 : "";
 
-            var date = "Date: " + DateTime.Now.ToShortDateString() + "\n";
+            var date = "Run Date: " + DateTime.Now.ToShortDateString() + "\n";
 
-            return string.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}", testProject, bvtResult, testCaseId, testTitle, testDesc, environment, date, testTester, slackNotes, resultsFile, url);
+            return string.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}", testCaseId, testProject, bvtResult, testTitle, testDesc, environment, date, testTester, slackNotes, resultsFile, url);
         }
 
 

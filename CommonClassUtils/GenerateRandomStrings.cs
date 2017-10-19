@@ -69,5 +69,13 @@ namespace CommonClassUtils
 
             return numbers;
         }
+
+        public static object GetTodaysDate()
+        {
+            DateTime thisDay = DateTime.Today;
+
+            string dateWeWant = thisDay.ToShortDateString();
+            return dateWeWant;
+        }
     }
 }
