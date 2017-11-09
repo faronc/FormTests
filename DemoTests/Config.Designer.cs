@@ -49,7 +49,7 @@ namespace DemoTests {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public string postToSlack {
             get {
                 return ((string)(this["postToSlack"]));
@@ -61,19 +61,7 @@ namespace DemoTests {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://hooks.slack.com/services/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")]
-        public string urlWithAccessToken {
-            get {
-                return ((string)(this["urlWithAccessToken"]));
-            }
-            set {
-                this["urlWithAccessToken"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#faron-test")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#test-results")]
         public string slackChannel {
             get {
                 return ((string)(this["slackChannel"]));
@@ -85,7 +73,7 @@ namespace DemoTests {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public string createJiraTicket {
             get {
                 return ((string)(this["createJiraTicket"]));
@@ -109,13 +97,25 @@ namespace DemoTests {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("PASS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("YourJiraPassword")]
         public string JiraPassword {
             get {
                 return ((string)(this["JiraPassword"]));
             }
             set {
                 this["JiraPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://hooks.slack.com/services/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")]
+        public string urlWithAccessToken {
+            get {
+                return ((string)(this["urlWithAccessToken"]));
+            }
+            set {
+                this["urlWithAccessToken"] = value;
             }
         }
     }

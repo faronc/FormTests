@@ -6,7 +6,7 @@
     <TestDesc>Verifying all fields are populated with valid data</TestDesc>
     <BugNumber></BugNumber>
     <ExpectedScenario>Progress: All fields tested with valid data</ExpectedScenario>
-    <ConvertToExcelNow>N</ConvertToExcelNow>
+    <BoolPostResults>False</BoolPostResults>
     <TextToAppear>Thank you for your query;We will contact you within 24 hours</TextToAppear>
     <TextNotToAppear>Your Details</TextNotToAppear>
     <Title>Mr</Title>
@@ -30,8 +30,8 @@
     <TestTitle>Account Number must be 8 digits</TestTitle>
     <TestDesc>Verifying account number with 7 digits is blocked from submitting</TestDesc>
     <BugNumber></BugNumber>
-    <ExpectedScenario>Fail to Submit - validation error expected on the account number field</ExpectedScenario>
-    <ConvertToExcelNow>N</ConvertToExcelNow>
+    <ExpectedScenario>Form Wont Submit - validation error expected on the account number field</ExpectedScenario>
+    <BoolPostResults>True</BoolPostResults>
     <TextToAppear>Please enter a valid Account Number containing digits only</TextToAppear>
     <TextNotToAppear>Thank you for your query;We will contact you within 24 hours</TextNotToAppear>
     <Title>Mr</Title>

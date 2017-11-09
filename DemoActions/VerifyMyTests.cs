@@ -22,7 +22,7 @@ namespace DemoActions
         public static string _noMatch = "DOES NOT MATCH";
         public static string _contains = "CONTAINS";
 
-        public static string VerifyStringOnThePage(string elementId, string goodwords, string badwords)
+        public static string VerifyStringOnThePage(string goodwords, string badwords)
         {
             Thread.Sleep(2000);
             // split each goodwords and badwords into an array so we can repeat verification for each item
