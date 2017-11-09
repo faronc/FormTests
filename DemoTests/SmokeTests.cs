@@ -66,6 +66,8 @@ namespace DemoTests
             _urlWithAccessToken = Config.Default.urlWithAccessToken;
             _postToSlack = Convert.ToBoolean(Config.Default.postToSlack);
             var bvtResult = string.Empty;
+            bool posttoJira = true;
+            bool postToSlack = true;
 
             _createJiraTicket = Convert.ToBoolean(Config.Default.createJiraTicket);
             var jiraUsername = Config.Default.JiraUsername;
@@ -226,10 +228,11 @@ namespace DemoTests
             }
 
 
+            if (posttoJira)
+                _jiraTicketNumberWithAutomationResults = JiraActions.PostToJira(testProject, testCaseId, jiraUsername, jiraPassword, jiraThreeLetterProjectId, _resultsFile, jiraParentId);
 
-            _jiraTicketNumberWithAutomationResults = JiraActions.PostToJira(testProject, testCaseId, jiraUsername, jiraPassword, jiraThreeLetterProjectId, _resultsFile, jiraParentId);
-
-            PostToSlack.PostResultsToSlack(bvtResult, testTester, testCaseId, testProject, testTitle, testDesc, _resultsFile, _jiraTicketNumberWithAutomationResults, _url, _urlWithAccessToken, _slackChannel);
+            if (postToSlack)
+                PostToSlack.PostResultsToSlack(bvtResult, testTester, testCaseId, testProject, testTitle, testDesc, _resultsFile, _jiraTicketNumberWithAutomationResults, _url, _urlWithAccessToken, _slackChannel);
 
         }
 
