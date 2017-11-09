@@ -4,6 +4,7 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CommonClassUtils;
 using DemoActions;
+using SlackLibrary;
 
 namespace DemoTests
 {
@@ -22,7 +23,9 @@ namespace DemoTests
         private bool _status = true;
         public static string DateTimeForFileName = DateTime.Now.ToString(@"MMM\-dd-HH\-mm");
         private string _testSeparate = "\n\n\n********** --------------------- **********\n\n\n";
-
+        private bool _postToSlack;
+        private string _slackChannel = string.Empty;
+        private string _urlWithAccessToken = string.Empty;
 
         /// <summary>
         /// Create a new instance of the driver
@@ -54,13 +57,20 @@ namespace DemoTests
         public void DataDriverDemoTests()
         {
             var testCaseId = Convert.ToString(_testContextInstance.DataRow["TestCaseID"]);
+            var testProject = "Demo Form for SoftTest talk";
             var testTitle = Convert.ToString(_testContextInstance.DataRow["TestTitle"]);
             var testDesc = Convert.ToString(_testContextInstance.DataRow["TestDesc"]);
             var bugNumber = Convert.ToString(_testContextInstance.DataRow["BugNumber"]);
             var expectedScenario = Convert.ToString(_testContextInstance.DataRow["ExpectedScenario"]);
-            var convertToExcelNow = Convert.ToString(_testContextInstance.DataRow["ConvertToExcelNow"]);
+            bool postResults = Convert.ToBoolean(_testContextInstance.DataRow["BoolPostResults"]);
             var textToAppear = Convert.ToString(_testContextInstance.DataRow["TextToAppear"]);
             var textNotToAppear = Convert.ToString(_testContextInstance.DataRow["TextNOTToAppear"]);
+
+            var slackNotes = "";
+            var testTester = "QA Automation";
+            _slackChannel = Config.Default.slackChannel;
+            _urlWithAccessToken = Config.Default.urlWithAccessToken;
+            var bvtResult = string.Empty;
 
             try
             {
@@ -150,7 +160,7 @@ namespace DemoTests
 
 
                 // Verify Your Tests
-                _testExplanation = "TEST CASE: Verify the expected success/failure strings appear on the page\n";
+                _testExplanation = "TEST CASE: Verify the expected scenario <" + expectedScenario + "> on the page as outlined in \n";
                 _message = VerifyMyTests.VerifyStringOnThePage(textToAppear, textNotToAppear);
                 Thread.Sleep(100);
                 using (var file = new StreamWriter(_resultsFile, true))
@@ -162,9 +172,9 @@ namespace DemoTests
 
 
 
-                if (convertToExcelNow.ToUpper().Contains("Y"))
+                if (postResults)
                 {
-                    //Txt2XLS.ConvertMyTxtToExcel(_resultsFile, _resultsFileAsXls);
+                    PostToSlack.PostResultsToSlack(bvtResult, testTester, "DemoTestData.xml", testProject, "Data Driven tests", "Verify multiple test scenarios", _resultsFile, slackNotes, _url, _urlWithAccessToken, _slackChannel);
                 }
 
 

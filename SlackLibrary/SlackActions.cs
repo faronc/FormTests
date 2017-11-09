@@ -51,7 +51,7 @@ namespace SlackLibrary
                 : "";
 
             url = !string.IsNullOrEmpty(url)
-                ? string.Format("Url: {0}\n", url)
+                ? string.Format("Url Tested: {0}\n", url)
                 : "";
 
             var date = "Run Date: " + DateTime.Now.ToShortDateString() + "\n";
